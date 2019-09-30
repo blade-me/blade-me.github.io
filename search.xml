@@ -4,11 +4,36 @@
   
     
     <entry>
+      <title>keepalive学习一</title>
+      <link href="/2019/09/10/keepalive%E5%AD%A6%E4%B9%A0%E4%B8%80/"/>
+      <url>/2019/09/10/keepalive%E5%AD%A6%E4%B9%A0%E4%B8%80/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> keepalive学习一 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习指南 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>hexo博客编写说明文档</title>
       <link href="/2019/09/09/hexo%E5%8D%9A%E5%AE%A2%E7%BC%96%E5%86%99%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/"/>
       <url>/2019/09/09/hexo%E5%8D%9A%E5%AE%A2%E7%BC%96%E5%86%99%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/</url>
       
-        <content type="html"><![CDATA[<h3 id="编写博客基本命令"><a href="#编写博客基本命令" class="headerlink" title="编写博客基本命令"></a>编写博客基本命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &apos;博客名称&apos; -- 创建博客</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g --generate 生成静态文件</span><br><span class="line">hexo d --deploy 文件生产后立即部署网站</span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<h3 id="编写博客基本命令"><a href="#编写博客基本命令" class="headerlink" title="编写博客基本命令"></a>编写博客基本命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &apos;博客名称&apos; -- 创建博客</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g --generate 生成静态文件</span><br><span class="line">hexo d --deploy 文件生产后立即部署网站</span><br></pre></td></tr></table></figure><p><a href="https://hexo.io/zh-cn/docs/commands.html" target="_blank" rel="noopener">hexo指令网站</a></p>]]></content>
       
       
       <categories>
@@ -20,11 +45,7 @@
       
         <tags>
             
-            <tag> jQuery </tag>
-            
-            <tag> 表格 </tag>
-            
-            <tag> 表单验证 </tag>
+            <tag> 说明文档 </tag>
             
         </tags>
       
