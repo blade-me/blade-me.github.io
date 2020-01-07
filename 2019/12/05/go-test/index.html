@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="学习笔记,">
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="myself">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+<meta name="description" content="Go语言拥有一套单元测试和性能测试系统，仅需要添加很少的代码就可以快速测试一段需求代码。 go test 命令，会自动读取源码目录下面名为 *_test.go 的文件，生成并运行测试用的可执行文件。输出的信息类似 1234ok archive/tar 0.011sFAIL archive/zip 0.022sok compress/gzip 0.033s...  性能测试系统可以给出代码的性能数据">
+<meta name="keywords" content="学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="go test">
+<meta property="og:url" content="http://yoursite.com/2019/12/05/go-test/index.html">
 <meta property="og:site_name" content="Blade Me BOKE">
-<meta property="og:description" content="myself">
+<meta property="og:description" content="Go语言拥有一套单元测试和性能测试系统，仅需要添加很少的代码就可以快速测试一段需求代码。 go test 命令，会自动读取源码目录下面名为 *_test.go 的文件，生成并运行测试用的可执行文件。输出的信息类似 1234ok archive/tar 0.011sFAIL archive/zip 0.022sok compress/gzip 0.033s...  性能测试系统可以给出代码的性能数据">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-09T05:38:28.050Z">
+<meta property="og:updated_time" content="2019-12-05T07:37:26.427Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
-<meta name="twitter:description" content="myself">
+<meta name="twitter:title" content="go test">
+<meta name="twitter:description" content="Go语言拥有一套单元测试和性能测试系统，仅需要添加很少的代码就可以快速测试一段需求代码。 go test 命令，会自动读取源码目录下面名为 *_test.go 的文件，生成并运行测试用的可执行文件。输出的信息类似 1234ok archive/tar 0.011sFAIL archive/zip 0.022sok compress/gzip 0.033s...  性能测试系统可以给出代码的性能数据">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/">
+  <link rel="canonical" href="http://yoursite.com/2019/12/05/go-test/">
 
 
 
 
 
-  <title>tags | Blade Me BOKE</title>
+  <title>go test | Blade Me BOKE</title>
   
 
 
@@ -272,40 +273,263 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/05/go-test/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blade Me">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blade Me BOKE">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">tags</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                目前共计 6 个标签
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/postgres/" style="font-size: 21px; color: #6f6f6f">postgres</a> <a href="/tags/pprof/" style="font-size: 12px; color: #ccc">pprof</a> <a href="/tags/学习文档/" style="font-size: 12px; color: #ccc">学习文档</a> <a href="/tags/学习笔记/" style="font-size: 21px; color: #6f6f6f">学习笔记</a> <a href="/tags/笔记/" style="font-size: 12px; color: #ccc">笔记</a> <a href="/tags/说明文档/" style="font-size: 30px; color: #111">说明文档</a>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">go test</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-05T15:08:09+08:00">
+                2019-12-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/golang/" itemprop="url" rel="index">
+                    <span itemprop="name">golang</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>Go语言拥有一套单元测试和性能测试系统，仅需要添加很少的代码就可以快速测试一段需求代码。</p>
+<p>go test 命令，会自动读取源码目录下面名为 *_test.go 的文件，生成并运行测试用的可执行文件。输出的信息类似</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ok archive/tar 0.011s</span><br><span class="line">FAIL archive/zip 0.022s</span><br><span class="line">ok compress/gzip 0.033s</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>性能测试系统可以给出代码的性能数据，帮助测试者分析性能问题。<strong>单元测试</strong>（unit testing），是指对软件中的最小可测试单元进行检查和验证。对于单元测试中单元的含义，一般要根据实际情况去判定其具体含义</p>
+<h3 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h3><p>要开始一个单元测试，需要准备一个 go 源码文件，在命名文件时需要让文件必须以<code>_test</code>结尾。默认的情况下，go test 命令不需要任何的参数，它会自动把你源码包下面所有 test 文件测试完毕，当然你也可以带上参数。</p>
+<p>这里介绍几个常用的参数：</p>
+<ul>
+<li>-bench regexp 执行相应的 benchmarks，例如 -bench=.</li>
+<li>-cover 开启测试覆盖率</li>
+<li>-run regexp 只运行 regexp 匹配的函数，例如 -run=Array 那么就执行包含有 Array 开头的函数</li>
+<li>-v 显示测试的详细命令</li>
+</ul>
+<p>单元测试源码文件可以由多个测试用例组成，每个测试用例函数需要以<code>Test</code>为前缀，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func TestXXX( t *testing.T )</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>测试用例文件不会参与正常源码编译，不会被包含到可执行文件中。</li>
+<li>测试用例文件使用 go test 指令来执行，没有也不需要 main() 作为函数入口。所有在以<code>_test</code>结尾的源码内以<code>Test</code>开头的函数会自动被执行。</li>
+<li>测试用例可以不传入 *testing.T 参数。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Book-Pro% go test demo_test.go </span><br><span class="line">ok      command-line-arguments  0.006s</span><br><span class="line">Book-Pro% go test -v demo_test.go</span><br><span class="line">=== RUN   TestAbs</span><br><span class="line">fdsfdasdfas</span><br><span class="line">--- PASS: TestAbs (0.00s)</span><br><span class="line">PASS</span><br><span class="line">ok      command-line-arguments  0.005s</span><br><span class="line">Book-Pro%</span><br></pre></td></tr></table></figure>
+
+<p>代码说明如下：</p>
+<ul>
+<li>第 1 行，在 go test 后跟 demo_test.go 文件，表示测试这个文件里的所有测试用例。</li>
+<li>第 2 行，显示测试结果，ok 表示测试通过，command-line-arguments 是测试用例需要用到的一个包名，0.005s 表示测试花费的时间。</li>
+<li>第 3 行，显示在附加参数中添加了<code>-v</code>，可以让测试时显示详细的流程。</li>
+<li>第 4 行，表示开始运行名叫 TestAbs 的测试用例。</li>
+<li>第 5 行，表示已经运行完 TestAbs 的测试用例，PASS 表示测试成功。</li>
+<li>第 6 行打印字符串fdsfdasdfas。</li>
+</ul>
+<p>go test 指定文件时默认执行文件内的所有测试用例。可以使用<code>-run</code>参数选择需要的测试用例单独执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go test -v -run TestA demo_test.go</span><br></pre></td></tr></table></figure>
+
+<p>TestA 和 TestAK 的测试用例都被执行，原因是<code>-run</code>跟随的测试用例的名称支持正则表达式，使用<code>-run TestA$</code>即可只执行 TestA 测试用例。</p>
+<h4 id="标记单元测试结果"><a href="#标记单元测试结果" class="headerlink" title="标记单元测试结果"></a>标记单元测试结果</h4><p>当需要终止当前测试用例时，可以使用 FailNow，参考下面的代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">func TestFailNow(t *testing.T) &#123;</span><br><span class="line">    t.FailNow()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试结果标记（具体位置是）还有一种只标记错误不终止测试的方法，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">func TestFail(t *testing.T) &#123;</span><br><span class="line">    fmt.Println(&quot;before fail&quot;)</span><br><span class="line">    t.Fail()</span><br><span class="line">    fmt.Println(&quot;after fail&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">=== RUN   TestFail</span><br><span class="line">before fail</span><br><span class="line">after fail</span><br><span class="line">--- FAIL: TestFail (0.00s)</span><br><span class="line">FAIL</span><br><span class="line">exit status 1</span><br><span class="line">FAIL        command-line-arguments        0.002s</span><br></pre></td></tr></table></figure>
+
+<p>从日志中看出，第 5 行调用 Fail() 后测试结果标记为失败，但是第 7 行依然被程序执行了。</p>
+<h4 id="单元测试日志"><a href="#单元测试日志" class="headerlink" title="单元测试日志"></a>单元测试日志</h4><p>每个测试用例可能并发执行，使用 testing.T 提供的日志输出可以保证日志跟随这个测试上下文一起打印输出。testing.T 提供了几种日志输出方法，详见下表所示。</p>
+<table>
+<thead>
+<tr>
+<th>方  法</th>
+<th>备  注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Log</td>
+<td>打印日志，同时结束测试</td>
+</tr>
+<tr>
+<td>Logf</td>
+<td>格式化打印日志，同时结束测试</td>
+</tr>
+<tr>
+<td>Error</td>
+<td>打印错误日志，同时结束测试</td>
+</tr>
+<tr>
+<td>Errorf</td>
+<td>格式化打印错误日志，同时结束测试</td>
+</tr>
+<tr>
+<td>Fatal</td>
+<td>打印致命日志，同时结束测试</td>
+</tr>
+<tr>
+<td>Fatalf</td>
+<td>格式化打印致命日志，同时结束测试</td>
+</tr>
+</tbody></table>
+<p>开发者可以根据实际需要选择合适的日志。</p>
+<h3 id="基准测试——获得代码内存占用和运行效率的性能数据"><a href="#基准测试——获得代码内存占用和运行效率的性能数据" class="headerlink" title="基准测试——获得代码内存占用和运行效率的性能数据"></a>基准测试——获得代码内存占用和运行效率的性能数据</h3><p>基准测试可以测试一段程序的运行性能及耗费 CPU 的程度。Go 语言中提供了基准测试框架，使用方法类似于单元测试，使用者无须准备高精度的计时器和各种分析工具，基准测试本身即可以打印出非常标准的测试报告</p>
+<h4 id="基础测试基本使用"><a href="#基础测试基本使用" class="headerlink" title="基础测试基本使用"></a>基础测试基本使用</h4><p>代码说明如下：</p>
+<ul>
+<li>第 1 行的<code>-bench=.</code>表示运行 benchmark_test.go 文件里的所有基准测试，和单元测试中的<code>-run</code>类似。</li>
+<li>第 4 行中显示基准测试名称，2000000000 表示测试的次数，也就是 testing.B 结构中提供给程序使用的 N。“0.33 ns/op”表示每一个操作耗费多少时间（纳秒）。</li>
+</ul>
+<p>注意：Windows 下使用 go test 命令行时，<code>-bench=.</code>应写为<code>-bench=&quot;.&quot;</code>。</p>
+<h4 id="基准测试原理"><a href="#基准测试原理" class="headerlink" title="基准测试原理"></a>基准测试原理</h4><p>基准测试框架对一个测试用例的默认测试时间是 1 秒。开始测试时，当以 Benchmark 开头的基准测试用例函数返回时还不到 1 秒，那么 testing.B 中的 N 值将按 1、2、5、10、20、50……递增，同时以递增后的值重新调用基准测试用例函数。</p>
+<h4 id="自定义测试时间"><a href="#自定义测试时间" class="headerlink" title="自定义测试时间"></a>自定义测试时间</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ go test -v -bench=. -benchtime=5s benchmark_test.go</span><br><span class="line">goos: linux</span><br><span class="line">goarch: amd64</span><br><span class="line">Benchmark_Add-4           10000000000                 0.33 ns/op</span><br><span class="line">PASS</span><br><span class="line">ok          command-line-arguments        3.380s</span><br></pre></td></tr></table></figure>
+
+<h4 id="测试内存"><a href="#测试内存" class="headerlink" title="测试内存"></a>测试内存</h4><p>基准测试可以对一段代码可能存在的内存分配进行统计，下面是一段使用字符串格式化的函数，内部会进行一些分配操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ go test -v -bench=Alloc -benchmem benchmark_test.go</span><br><span class="line">goos: linux</span><br><span class="line">goarch: amd64</span><br><span class="line">Benchmark_Alloc-4 20000000 109 ns/op 16 B/op 2 allocs/op</span><br><span class="line">PASS</span><br><span class="line">ok          command-line-arguments        2.311s</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第 1 行的代码中<code>-bench</code>后添加了 Alloc，指定只测试 Benchmark_Alloc() 函数。</li>
+<li>第 4 行代码的“16 B/op”表示每一次调用需要分配 16 个字节，“2 allocs/op”表示每一次调用有两次分配。</li>
+</ul>
+<p>开发者根据这些信息可以迅速找到可能的分配点，进行优化和调整。</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/03/网络安全/" rel="next" title="网络安全">
+                <i class="fa fa-chevron-left"></i> 网络安全
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -338,8 +562,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -399,6 +632,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#单元测试"><span class="nav-number">1.</span> <span class="nav-text">单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#标记单元测试结果"><span class="nav-number">1.1.</span> <span class="nav-text">标记单元测试结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单元测试日志"><span class="nav-number">1.2.</span> <span class="nav-text">单元测试日志</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基准测试——获得代码内存占用和运行效率的性能数据"><span class="nav-number">2.</span> <span class="nav-text">基准测试——获得代码内存占用和运行效率的性能数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基础测试基本使用"><span class="nav-number">2.1.</span> <span class="nav-text">基础测试基本使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基准测试原理"><span class="nav-number">2.2.</span> <span class="nav-text">基准测试原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义测试时间"><span class="nav-number">2.3.</span> <span class="nav-text">自定义测试时间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试内存"><span class="nav-number">2.4.</span> <span class="nav-text">测试内存</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

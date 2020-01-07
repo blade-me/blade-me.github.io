@@ -284,6 +284,395 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/05/go-test/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blade Me">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blade Me BOKE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/05/go-test/" itemprop="url">go test</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-05T15:08:09+08:00">
+                2019-12-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/golang/" itemprop="url" rel="index">
+                    <span itemprop="name">golang</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Go语言拥有一套单元测试和性能测试系统，仅需要添加很少的代码就可以快速测试一段需求代码。</p>
+<p>go test 命令，会自动读取源码目录下面名为 *_test.go 的文件，生成并运行测试用的可执行文件。输出的信息类似</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ok archive/tar 0.011s</span><br><span class="line">FAIL archive/zip 0.022s</span><br><span class="line">ok compress/gzip 0.033s</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>性能测试系统可以给出代码的性能数据，帮助测试者分析性能问题。<strong>单元测试</strong>（unit testing），是指对软件中的最小可测试单元进行检查和验证。对于单元测试中单元的含义，一般要根据实际情况去判定其具体含义</p>
+<h3 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h3><p>要开始一个单元测试，需要准备一个 go 源码文件，在命名文件时需要让文件必须以<code>_test</code>结尾。默认的情况下，go test 命令不需要任何的参数，它会自动把你源码包下面所有 test 文件测试完毕，当然你也可以带上参数。</p>
+<p>这里介绍几个常用的参数：</p>
+<ul>
+<li>-bench regexp 执行相应的 benchmarks，例如 -bench=.</li>
+<li>-cover 开启测试覆盖率</li>
+<li>-run regexp 只运行 regexp 匹配的函数，例如 -run=Array 那么就执行包含有 Array 开头的函数</li>
+<li>-v 显示测试的详细命令</li>
+</ul>
+<p>单元测试源码文件可以由多个测试用例组成，每个测试用例函数需要以<code>Test</code>为前缀，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func TestXXX( t *testing.T )</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>测试用例文件不会参与正常源码编译，不会被包含到可执行文件中。</li>
+<li>测试用例文件使用 go test 指令来执行，没有也不需要 main() 作为函数入口。所有在以<code>_test</code>结尾的源码内以<code>Test</code>开头的函数会自动被执行。</li>
+<li>测试用例可以不传入 *testing.T 参数。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Book-Pro% go test demo_test.go </span><br><span class="line">ok      command-line-arguments  0.006s</span><br><span class="line">Book-Pro% go test -v demo_test.go</span><br><span class="line">=== RUN   TestAbs</span><br><span class="line">fdsfdasdfas</span><br><span class="line">--- PASS: TestAbs (0.00s)</span><br><span class="line">PASS</span><br><span class="line">ok      command-line-arguments  0.005s</span><br><span class="line">Book-Pro%</span><br></pre></td></tr></table></figure>
+
+<p>代码说明如下：</p>
+<ul>
+<li>第 1 行，在 go test 后跟 demo_test.go 文件，表示测试这个文件里的所有测试用例。</li>
+<li>第 2 行，显示测试结果，ok 表示测试通过，command-line-arguments 是测试用例需要用到的一个包名，0.005s 表示测试花费的时间。</li>
+<li>第 3 行，显示在附加参数中添加了<code>-v</code>，可以让测试时显示详细的流程。</li>
+<li>第 4 行，表示开始运行名叫 TestAbs 的测试用例。</li>
+<li>第 5 行，表示已经运行完 TestAbs 的测试用例，PASS 表示测试成功。</li>
+<li>第 6 行打印字符串fdsfdasdfas。</li>
+</ul>
+<p>go test 指定文件时默认执行文件内的所有测试用例。可以使用<code>-run</code>参数选择需要的测试用例单独执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go test -v -run TestA demo_test.go</span><br></pre></td></tr></table></figure>
+
+<p>TestA 和 TestAK 的测试用例都被执行，原因是<code>-run</code>跟随的测试用例的名称支持正则表达式，使用<code>-run TestA$</code>即可只执行 TestA 测试用例。</p>
+<h4 id="标记单元测试结果"><a href="#标记单元测试结果" class="headerlink" title="标记单元测试结果"></a>标记单元测试结果</h4><p>当需要终止当前测试用例时，可以使用 FailNow，参考下面的代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">func TestFailNow(t *testing.T) &#123;</span><br><span class="line">    t.FailNow()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试结果标记（具体位置是）还有一种只标记错误不终止测试的方法，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">func TestFail(t *testing.T) &#123;</span><br><span class="line">    fmt.Println(&quot;before fail&quot;)</span><br><span class="line">    t.Fail()</span><br><span class="line">    fmt.Println(&quot;after fail&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">=== RUN   TestFail</span><br><span class="line">before fail</span><br><span class="line">after fail</span><br><span class="line">--- FAIL: TestFail (0.00s)</span><br><span class="line">FAIL</span><br><span class="line">exit status 1</span><br><span class="line">FAIL        command-line-arguments        0.002s</span><br></pre></td></tr></table></figure>
+
+<p>从日志中看出，第 5 行调用 Fail() 后测试结果标记为失败，但是第 7 行依然被程序执行了。</p>
+<h4 id="单元测试日志"><a href="#单元测试日志" class="headerlink" title="单元测试日志"></a>单元测试日志</h4><p>每个测试用例可能并发执行，使用 testing.T 提供的日志输出可以保证日志跟随这个测试上下文一起打印输出。testing.T 提供了几种日志输出方法，详见下表所示。</p>
+<table>
+<thead>
+<tr>
+<th>方  法</th>
+<th>备  注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Log</td>
+<td>打印日志，同时结束测试</td>
+</tr>
+<tr>
+<td>Logf</td>
+<td>格式化打印日志，同时结束测试</td>
+</tr>
+<tr>
+<td>Error</td>
+<td>打印错误日志，同时结束测试</td>
+</tr>
+<tr>
+<td>Errorf</td>
+<td>格式化打印错误日志，同时结束测试</td>
+</tr>
+<tr>
+<td>Fatal</td>
+<td>打印致命日志，同时结束测试</td>
+</tr>
+<tr>
+<td>Fatalf</td>
+<td>格式化打印致命日志，同时结束测试</td>
+</tr>
+</tbody></table>
+<p>开发者可以根据实际需要选择合适的日志。</p>
+<h3 id="基准测试——获得代码内存占用和运行效率的性能数据"><a href="#基准测试——获得代码内存占用和运行效率的性能数据" class="headerlink" title="基准测试——获得代码内存占用和运行效率的性能数据"></a>基准测试——获得代码内存占用和运行效率的性能数据</h3><p>基准测试可以测试一段程序的运行性能及耗费 CPU 的程度。Go 语言中提供了基准测试框架，使用方法类似于单元测试，使用者无须准备高精度的计时器和各种分析工具，基准测试本身即可以打印出非常标准的测试报告</p>
+<h4 id="基础测试基本使用"><a href="#基础测试基本使用" class="headerlink" title="基础测试基本使用"></a>基础测试基本使用</h4><p>代码说明如下：</p>
+<ul>
+<li>第 1 行的<code>-bench=.</code>表示运行 benchmark_test.go 文件里的所有基准测试，和单元测试中的<code>-run</code>类似。</li>
+<li>第 4 行中显示基准测试名称，2000000000 表示测试的次数，也就是 testing.B 结构中提供给程序使用的 N。“0.33 ns/op”表示每一个操作耗费多少时间（纳秒）。</li>
+</ul>
+<p>注意：Windows 下使用 go test 命令行时，<code>-bench=.</code>应写为<code>-bench=&quot;.&quot;</code>。</p>
+<h4 id="基准测试原理"><a href="#基准测试原理" class="headerlink" title="基准测试原理"></a>基准测试原理</h4><p>基准测试框架对一个测试用例的默认测试时间是 1 秒。开始测试时，当以 Benchmark 开头的基准测试用例函数返回时还不到 1 秒，那么 testing.B 中的 N 值将按 1、2、5、10、20、50……递增，同时以递增后的值重新调用基准测试用例函数。</p>
+<h4 id="自定义测试时间"><a href="#自定义测试时间" class="headerlink" title="自定义测试时间"></a>自定义测试时间</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ go test -v -bench=. -benchtime=5s benchmark_test.go</span><br><span class="line">goos: linux</span><br><span class="line">goarch: amd64</span><br><span class="line">Benchmark_Add-4           10000000000                 0.33 ns/op</span><br><span class="line">PASS</span><br><span class="line">ok          command-line-arguments        3.380s</span><br></pre></td></tr></table></figure>
+
+<h4 id="测试内存"><a href="#测试内存" class="headerlink" title="测试内存"></a>测试内存</h4><p>基准测试可以对一段代码可能存在的内存分配进行统计，下面是一段使用字符串格式化的函数，内部会进行一些分配操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ go test -v -bench=Alloc -benchmem benchmark_test.go</span><br><span class="line">goos: linux</span><br><span class="line">goarch: amd64</span><br><span class="line">Benchmark_Alloc-4 20000000 109 ns/op 16 B/op 2 allocs/op</span><br><span class="line">PASS</span><br><span class="line">ok          command-line-arguments        2.311s</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第 1 行的代码中<code>-bench</code>后添加了 Alloc，指定只测试 Benchmark_Alloc() 函数。</li>
+<li>第 4 行代码的“16 B/op”表示每一次调用需要分配 16 个字节，“2 allocs/op”表示每一次调用有两次分配。</li>
+</ul>
+<p>开发者根据这些信息可以迅速找到可能的分配点，进行优化和调整。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/03/网络安全/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Blade Me">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blade Me BOKE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/03/网络安全/" itemprop="url">网络安全</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-03T16:17:01+08:00">
+                2019-12-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络安全/" itemprop="url" rel="index">
+                    <span itemprop="name">网络安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="什么是xss攻击"><a href="#什么是xss攻击" class="headerlink" title="什么是xss攻击"></a>什么是xss攻击</h3><p>XSS 攻击：跨站脚本攻击 (Cross-Site Scripting)，为了不和层叠样式表 (Cascading Style Sheets, CSS) 的缩写混淆，故将跨站脚本攻击缩写为 XSS。XSS 是一种常见的 web 安全漏洞，它允许攻击者将恶意代码植入到提供给其它用户使用的页面中。不同于大多数攻击 (一般只涉及攻击者和受害者)，XSS 涉及到三方，即攻击者、客户端与 Web 应用。<strong>XSS 的攻击目标是为了盗取存储在客户端的 cookie 或者其他网站用于识别客户端身份的敏感信息。</strong>一旦获取到合法用户的信息后，攻击者甚至可以假冒合法用户与网站进行交互。</p>
+<h3 id="XSS分类"><a href="#XSS分类" class="headerlink" title="XSS分类"></a>XSS分类</h3><p>XSS 通常可以分为两大类：一类是存储型 XSS，主要出现在让用户输入数据，供其他浏览此页的用户进行查看的地方，包括留言、评论、博客日志和各类表单等。应用程序从数据库中查询数据，在页面中显示出来，攻击者在相关页面输入恶意的脚本数据后，用户浏览此类页面时就可能受到攻击。这个流程简单可以描述为：恶意用户的 Html 输入 Web 程序 -&gt; 进入数据库 -&gt; Web 程序 -&gt; 用户浏览器。另一类是反射型 XSS，主要做法是将脚本代码加入 URL 地址的请求参数里，请求参数进入程序后在页面直接输出，用户点击类似的恶意链接就可能受到攻击。</p>
+<h3 id="XSS-目前主要的手段和目的如下："><a href="#XSS-目前主要的手段和目的如下：" class="headerlink" title="XSS 目前主要的手段和目的如下："></a>XSS 目前主要的手段和目的如下：</h3><ul>
+<li>盗用 cookie，获取敏感信息。</li>
+<li>利用植入 Flash，通过 crossdomain 权限设置进一步获取更高权限；或者利用 Java 等得到类似的操作。</li>
+<li>利用 iframe、frame、XMLHttpRequest 或上述 Flash 等方式，以（被攻击者）用户的身份执行一些管理动作，或执行一些如：发微博、加好友、发私信等常规操作，前段时间新浪微博就遭遇过一次 XSS。</li>
+<li>利用可被攻击的域受到其他域信任的特点，以受信任来源的身份请求一些平时不允许的操作，如进行不当的投票活动。</li>
+<li>在访问量极大的一些页面上的 XSS 可以攻击一些小型网站，实现 DDoS 攻击的效果</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/02/pprof性能分析环境搭建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -377,7 +766,36 @@
       
         
           
-            
+            <h3 id="Proof"><a href="#Proof" class="headerlink" title="Proof"></a>Proof</h3><ul>
+<li>runtime/pprof：采集程序（非 Server）的运行数据进行分析</li>
+<li>net/http/pprof：采集 HTTP Server 的运行时数据进行分析</li>
+</ul>
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><ol>
+<li><p>生产关系图和火焰图需要安装<code>yum install graphviz</code>  <code>dot -V</code> 查看是否安装成功</p>
+</li>
+<li><p>如果程序本身就是web服务器,那么只需要通过代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import(</span><br><span class="line">_&quot;net/http/pprof&quot;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>，将pprof引入，然后在浏览器访问<a href="http://localhost:port/debug/pprof/就能看到当前web服务的状态，包括CPU占用情况和内存使用情况等" target="_blank" rel="noopener">http://localhost:port/debug/pprof/就能看到当前web服务的状态，包括CPU占用情况和内存使用情况等</a></p>
+</li>
+<li><p>如果你的go程序不是web服务器，而是一个服务进程，那么你就需要开启一个goroutine来开启端口监听。<br>比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">go func() &#123;</span><br><span class="line">    log.Println(http.ListenAndServe(&quot;localhost:6060&quot;, nil)) </span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+
+<p>同样的访问<a href="http://localhost:6060/debug/pprof就可以查看程序运行的信息。" target="_blank" rel="noopener">http://localhost:6060/debug/pprof就可以查看程序运行的信息。</a></p>
+</li>
+<li><p>如果你的程序只是一个应用程序，那么你就需要使用“runtime/ppprof”包了。<br>官网给出的代码是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var cpuprofile = flag.String(&quot;cpuprofile&quot;, &quot;&quot;, &quot;write cpu profile to file&quot;)</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    flag.Parse()</span><br><span class="line">    if *cpuprofile != &quot;&quot; &#123;</span><br><span class="line">        f, err := os.Create(*cpuprofile)</span><br><span class="line">        if err != nil &#123;</span><br><span class="line">            log.Fatal(err)</span><br><span class="line">        &#125;</span><br><span class="line">        pprof.StartCPUProfile(f)</span><br><span class="line">        defer pprof.StopCPUProfile()</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们在运行这个程序的时候加上一个参数–cpuprofile=*.prof就可以再对应目录下生成一个.pprof的文件,程序运行的信息就都在这个文件里了。然后进入对应目录,运行命令:go tool pprof 加刚才生成的pprof文件命即可进入到pprof中，输入web命令，可以生成对应的svg文件。</p>
+<h3 id="生成-pb-gz-文件命令"><a href="#生成-pb-gz-文件命令" class="headerlink" title="生成.pb.gz 文件命令"></a>生成.pb.gz 文件命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go tool pprof http://localhost:6060/debug/pprof/pprofile?second=120</span><br></pre></td></tr></table></figure>
+
+<h3 id="生成图像界面"><a href="#生成图像界面" class="headerlink" title="生成图像界面"></a>生成图像界面</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go tool pprof -http=localhost:8080 ./test /root/pprof/*.pb.gz</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>大多数框架中都有自己的pprof,应用时可进行研究</p>
+<p>未完待续。。。。。</p>
+
           
         
       
@@ -1373,8 +1791,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">笔记</span>
+                  <a href="/categories/golang/" itemprop="url" rel="index">
+                    <span itemprop="name">golang</span>
                   </a>
                 </span>
 
@@ -1606,287 +2024,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/09/hexo博客编写说明文档/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blade Me">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blade Me BOKE">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/09/hexo博客编写说明文档/" itemprop="url">hexo博客编写说明文档</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-09T11:55:19+08:00">
-                2019-09-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hexo说明文档/" itemprop="url" rel="index">
-                    <span itemprop="name">hexo说明文档</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="编写博客基本命令"><a href="#编写博客基本命令" class="headerlink" title="编写博客基本命令"></a>编写博客基本命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &apos;博客名称&apos; -- 创建博客</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g --generate 生成静态文件</span><br><span class="line">hexo d --deploy 文件生产后立即部署网站</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://hexo.io/zh-cn/docs/commands.html" target="_blank" rel="noopener">hexo指令网站</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: [Deployment](</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/03/基于微服务架构/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blade Me">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blade Me BOKE">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/03/基于微服务架构/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-03T10:32:21+08:00">
-                2019-07-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>基于微服务架构. 数据库原理常用性能优化技术. 以及 NoSQL原理、使用场景以及限制,精通redis。熟悉至少一种消息队列 Kafka/Rabbitmq/Redis等 负责所编程序的自测试工作，并参加系统集成和联调 精通TCP/IP，HTTP协议，包括但不限于RPC、调用策略等；精通Protobuf/JSON序列化协议者优先</p>
-<p>熟悉mysql,redis,mongodb等配置使用方法；</p>
-<p>熟悉tcp/ip, http/https协议</p>
-<p>熟悉docker开发方式；</p>
-<p>有gitlab-ci/travis-ci/teamcity使用经验优先；</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1930,7 +2074,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1941,7 +2085,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1952,7 +2096,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1989,7 +2133,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
